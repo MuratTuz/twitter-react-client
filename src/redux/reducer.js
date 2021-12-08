@@ -6,7 +6,7 @@ import {
 } from "./actionTypes";
 
 export const initialState = {
-  username: null,
+  email: null,
   token: null,
   userId: null,
   tweets: null,
@@ -17,12 +17,12 @@ export const initialState = {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGGED_IN:
-      const { token, userId, username } = action.payload;
+      const { token, userId, email } = action.payload;
       return {
         ...state,
         token,
         userId,
-        username,
+        email,
       };
 
     case POSTED_TWEET:

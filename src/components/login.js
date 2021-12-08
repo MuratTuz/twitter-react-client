@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
-import { LoginListBoxContainer } from "../containers/LoginListBoxContainer";
+import LoginListBox from "../components/LoginListBox";
 const img_src = process.env.PUBLIC_URL + "twitter-pic.jpeg";
 
 const Login = () => (
@@ -22,7 +22,7 @@ const Login = () => (
           Please Login
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          <LoginListBoxContainer />
+          <LoginListBox />
         </Typography>
       </CardContent>
     </CardActionArea>

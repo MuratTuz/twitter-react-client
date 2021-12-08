@@ -8,12 +8,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
 
-import { postTweetService } from "../services/tweetServices";
+import { connect } from "react-redux";
+import { useMutation } from "@apollo/client";
 
-const TweetForm = ({ postedTweet, userId, token }) => {
+const TweetForm = ({ token }) => {
   const [open, setOpen] = useState(false);
   const [tweetText, setTweetText] = useState("");
   const [tweetTitle, setTweetTitle] = useState("");
+  const [postedTweet, newTweet] = useMutation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,8 +29,8 @@ const TweetForm = ({ postedTweet, userId, token }) => {
 
   const postTweet = () => {
     const newTweet = { title: tweetTitle, text: tweetText };
-    postedTweet(newTweet);
-    postTweetService(token, userId, newTweet);
+    //postedTweet(newTweet);
+
     handleClose();
   };
 
@@ -81,4 +83,8 @@ const TweetForm = ({ postedTweet, userId, token }) => {
   );
 };
 
-export default TweetForm;
+const mapStateToProps = (state) => ({
+  token: state.token,
+});
+
+export default connect(mapStateToProps)(TweetForm);

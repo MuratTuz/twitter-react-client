@@ -1,8 +1,9 @@
 import { Navigate } from "react-router";
-//import { getTokenFromSessionStorage } from "../services/saveToken";
+import { getTokenFromSessionStorage } from "../services/tokenServices";
 
-const RequireLogin = ({ token, children }) =>
-  token === null ? <Navigate to="/login" /> : children;
-  
+const RequireLogin = ({ children }) => {
+  const { token } = getTokenFromSessionStorage();
+  return token === null ? <Navigate to="/login" /> : children;
+};
 
 export default RequireLogin;

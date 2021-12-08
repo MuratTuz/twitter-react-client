@@ -6,11 +6,10 @@ import {
   FAILED_TWEETS,
 } from "./actionTypes";
 
-import { getAllTweetsService } from "../services/tweetServices";
 
-export const loggedIn = (token, userId, username) => ({
+export const loggedIn = (token, userId, email) => ({
   type: LOGGED_IN,
-  payload: { token, userId, username },
+  payload: { token, userId, email },
 });
 
 export const postedTweet = (postedTweet) => ({
@@ -28,7 +27,7 @@ export const failedTweets = (error) => ({
   payload: error,
 });
 
-export const getTweets = (token) => {
+/* export const getTweets = (token) => {
   return async (dispatch) => {
     try {
       const response = await getAllTweetsService(token);
@@ -38,4 +37,4 @@ export const getTweets = (token) => {
       dispatch(failedTweets(error));
     }
   };
-};
+}; */

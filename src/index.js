@@ -1,22 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
+import { ApolloProvider } from "@apollo/react-hooks";
+import client from "./graphQL/client";
+import App from "./App.js";
 
 import "./index.css";
-import App from "./App.js";
 import "bootstrap/dist/css/bootstrap.css";
-
-import reportWebVitals from "./reportWebVitals";
 
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 
+import reportWebVitals from "./reportWebVitals";
+
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 
