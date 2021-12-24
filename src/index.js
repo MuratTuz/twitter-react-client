@@ -14,13 +14,13 @@ import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <ApolloProvider client={client}>
       <Router>
         <App />
       </Router>
-    </Provider>
-  </ApolloProvider>,
+    </ApolloProvider>
+  </Provider>,
   document.getElementById("root")
 );
 

@@ -7,9 +7,9 @@ import {
 } from "./actionTypes";
 
 
-export const loggedIn = (token, userId, email) => ({
+export const loggedIn = (username) => ({
   type: LOGGED_IN,
-  payload: { token, userId, email },
+  payload: username,
 });
 
 export const postedTweet = (postedTweet) => ({

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 import LoginListBox from "../components/LoginListBox";
-const img_src = process.env.PUBLIC_URL + "twitter-pic.jpeg";
+const img_src = "./twitter-pic.jpeg";
 
 const Login = () => (
   <Card sx={{ maxWidth: 345 }}>

@@ -10,22 +10,22 @@ import { GET_TOKEN, GET_USERS } from "../graphQL/query";
 import { connect } from "react-redux";
 import { loggedIn } from "../redux/actions";
 
-const LoginListBox = () => {
+const LoginListBox = ({ loggedIn }) => {
   const navigate = useNavigate();
-
   const { data } = useQuery(GET_USERS);
-  console.log("data  ", data);
   var options =
     data && "users" in data
       ? data.users.map((user) => user.email)
       : ["Loading..."];
 
-  const [getToken, { data: tokenData, loading, error }] = useLazyQuery(
-    GET_TOKEN
-    /*     {
+  const [getTokenFromRemoteServer, { data: tokenData, loading, error }] =
+    useLazyQuery(
+      GET_TOKEN
+      /*     {
       onCompleted: (data) => setTokenData({ tokenData }),
     } */
-  );
+    );
+
   if (loading) {
     return <p>Loading</p>;
   }
@@ -34,24 +34,25 @@ const LoginListBox = () => {
     errorAlert(error);
     return <p>Error!</p>;
   }
-  if (tokenData !== undefined) {
+  if (tokenData) {
     const {
-      tokenData: { token, email, _id },
+      tokenData: { token },
     } = tokenData;
-    loggedIn(token, email, _id);
-    saveTokenToSessionStorage(token, email, _id);
+
+    saveTokenToSessionStorage(token);
     navigate("/tweets");
-    console.log("token ", token);
   }
+
   const handleChange = async (email) => {
-    console.log("email ", email);
-    getToken({ variables: { email } });
+    loggedIn(email);
+    getTokenFromRemoteServer({ variables: { email } });
   };
 
   return (
     <Autocomplete
-      onChange={(_event, newValue) => {
-        handleChange(newValue);
+      onChange={(event, email) => {
+        event.preventDefault();
+        handleChange(email);
       }}
       id="uncontrollable-list-box"
       options={options}
